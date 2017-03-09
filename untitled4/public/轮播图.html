@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        ul{
+            padding-left: 0;
+        }
+        #box{
+            width:600px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            margin:100px auto;
+            padding-bottom: 20px;
+
+        }
+        #box #content{
+            width:400%;
+            border: 1px solid green;
+         position: relative;
+
+
+        }
+        img{
+            width:600px;
+            float: left;
+        }
+        #nav{
+            width:600px;
+            height:100px;
+            border:1px solid red;
+
+        }
+        ul{
+            margin-left: 180px;
+
+            list-style: none;
+             clear:both;
+        }
+        ul li{
+            width:40px;
+            height:40px;
+            border:1px solid #ccc;
+            border-radius: 100%;
+            float: left;
+            line-height: 40px;
+            text-align: center;
+         margin: 5px  5px;
+
+        }
+        .bg{
+            background: blue;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <div id="content">
+        <img src="./1.jpg.jpg" alt=""/>
+        <img src="./2.jpg" alt=""/>
+        <img src="./3.jpg" alt=""/>
+        <img src="./4.jpg" alt=""/>
+    </div>
+    <div id="nav">
+
+
+        <ul>
+
+            <li class="active">1</li>
+            <li class="active">2</li>
+            <li class="active">3</li>
+            <li class="active">4</li>
+
+        </ul>
+
+    </div>
+
+</div>
+</body>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+    var box=$('#box')
+    var content=$('#content')
+    var i=0;
+    var x;
+    var time=null;
+    var a=0;
+     content[0].style.left=0;
+
+
+
+
+      function run(){
+          time=setInterval(function(){
+
+              if(i==0){
+                  x=-1
+              }
+              if(i==-3){
+                  x=1;
+              }
+              i=i+x
+
+              if(x>0){
+                  content[0].style.left=x*i*(100)+'%';
+              }else{
+                  content[0].style.left=x*i*(-100)+'%';
+              }
+              $('ul li').removeClass('bg')
+
+              $('ul li').eq(-i).addClass('bg')
+
+          },1000)
+
+
+      }
+
+    run()
+    $('ul li').click(function(){
+
+        i=-$(this).index()
+        clearInterval(time)
+        content[0].style.left=i*(100)+'%';
+        $('ul li').removeClass('bg')
+        $('ul li').eq(-i).addClass('bg')
+      setTimeout(function(){
+          run()
+      },500)
+
+
+
+
+
+    })
+</script>
+</html>
